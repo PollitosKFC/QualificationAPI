@@ -5,10 +5,15 @@ import pe.edu.upc.qualificationapi.EasyJobs.entity.AppointmentHistory;
 import pe.edu.upc.qualificationapi.EasyJobs.entity.Technician;
 import pe.edu.upc.qualificationapi.EasyJobs.entity.TechnicianQualification;
 
+import java.util.List;
+
 @Service
 public interface TechnicianQualificationService {
-    TechnicianQualification findTechnicianQualificationByTechnicianId(Long id);
-    TechnicianQualification editTechnicianQualification(Long id, Double qualification);
-    AppointmentHistory updateAppointmentHistoryQualificationAverage(AppointmentHistory appointmentHistory, Long technicianId);
-    TechnicianQualification createTechnicianAverageQualification(Long technicianId, Double qualification);
+    List<Technician> ListTechniciansByQualification(Double qualificationAverage);
+
+    TechnicianQualification createTechnicianQualification(TechnicianQualification technicianQualification, Long id);
+
+    List<AppointmentHistory> findAppointmentHistoryByTechnicianId(Long id);
+    AppointmentHistory createAppointmentHistory(AppointmentHistory appointmentHistory, Long AppointmentId);
+
 }

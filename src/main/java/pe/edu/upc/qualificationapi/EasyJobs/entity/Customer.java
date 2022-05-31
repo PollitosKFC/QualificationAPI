@@ -1,7 +1,6 @@
 package pe.edu.upc.qualificationapi.EasyJobs.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,19 +11,19 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
-@Table(name = "tbl_technician")
+@Table(name = "tbl_customer")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class Technician extends User {
+public class Customer extends User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Column(name = "phoneNumber",length = 40)
+    @Column(unique = true, length = 40)
     private Long phoneNumber;
 
     @NotNull
@@ -32,7 +31,7 @@ public class Technician extends User {
     private String firstName;
 
     @NotNull
-    @Column(name = "lastName",length = 200)
+    @Column(name = "lastName", length = 200)
     private String lastName;
 
     @NotNull
@@ -44,22 +43,14 @@ public class Technician extends User {
     private String city;
 
     @NotNull
-    @Column(name = "district",length = 200)
+    @Column(name = "district", length = 200)
     private String district;
-
-    @NotNull
-    @Column(name = "verified", length = 200)
-    private Boolean verified;
 
     @NotNull
     @Column(name = "gender", length = 200)
     private String gender;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "technician",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Appointment> technician_appointment;
-
-    @JsonManagedReference
-    @OneToOne(mappedBy = "technician",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private TechnicianQualification technician_qualification;
+    @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Appointment> customer_appointment;
 }
