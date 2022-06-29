@@ -63,4 +63,21 @@ public class TechnicianQualificationServiceImplTest {
         // Assert
         assertThat(technicianQualificationResult).isEqualTo(technicianQualification);
     }
+    @Test
+    @DisplayName("When Delete Qualification With Valid Qualification")
+    public void WhenDeleteQualificationWithValidQualification() {
+        // Arrange
+        TechnicianQualification technicianQualification = new TechnicianQualification();
+        technicianQualification.setId(1L);
+        technicianQualification.setNumberOfReviews(2);
+        technicianQualification.setQualificationAverage(1.5);
+        technicianQualification.setCurrentQualification(1.8);
+
+        when(technicianQualificationRepository.save(technicianQualification)).thenAnswer(invocation -> invocation.getArgument(0));
+        technicianQualificationRepository.deleteById(1L);
+        // Act
+        TechnicianQualification technicianQualificationResult = null;
+        // Assert
+        assertThat(technicianQualificationResult).isEqualTo(technicianQualificationRepository.getById(1L));
+    }
 }
