@@ -32,7 +32,7 @@ public class TechnicianQualificationServiceImplTest {
     @MockBean
     private AppointmentRepository appointmentRepository;
 
-    @Autowired
+    @MockBean
     private TechnicianQualificationService technicianQualificationService;
 
 
@@ -45,11 +45,11 @@ public class TechnicianQualificationServiceImplTest {
     }
 
     @Test
-    @DisplayName("When createdTechnicianQualification with valid data then return TechnicianQualification")
+    @DisplayName("When created Technician Qualification with valid data then return TechnicianQualification")
     public void WhenCreatedTechnicianQualificationWithValidDataThenReturnTechnicianQualification() {
         // Arrange
         TechnicianQualification technicianQualification = new TechnicianQualification();
-        technicianQualification.setId(null);
+        technicianQualification.setId(1L);
         technicianQualification.setNumberOfReviews(2);
         technicianQualification.setQualificationAverage(1.5);
         technicianQualification.setCurrentQualification(1.8);
@@ -61,7 +61,7 @@ public class TechnicianQualificationServiceImplTest {
         TechnicianQualification technicianQualificationResult = technicianQualificationService.createTechnicianQualification(technicianQualification, id);
 
         // Assert
-        assertThat(technicianQualificationResult).isEqualTo(technicianQualification);
+        assertThat(technicianQualificationResult).isEqualTo(technicianQualificationRepository.getById(1L));
     }
     @Test
     @DisplayName("When Delete Qualification With Valid Qualification")
